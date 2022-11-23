@@ -9,7 +9,7 @@ const PageAbout: React.FC = function () {
       <h2>关于</h2>
       <div>
         <div>
-          <b>Floating Live GUI</b>{' '}
+          <b>Floating Live GUI</b>{' '}<span style={{fontSize: "small"}}>619 Edition</span>{' '}
           {version.app ? `[DEV] 版本 v${version.app}` : null}
         </div>
         <div>{version.client} 模式</div>

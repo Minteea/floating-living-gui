@@ -15,6 +15,7 @@ import server from './plugins/server';
 import save from './plugins/save';
 import search from './plugins/search';
 import consoleEvent from 'floating-live/plugin/consoleEvent';
+import bili619Enhance from './plugins/bili619Enhance';
 
 
 const configPath = './config/config.json';
@@ -30,8 +31,8 @@ export default class Program extends FloatingLive {
   constructor() {
     super()
     this.links = [new IpcLink()]
-    this.initPlugin()
     this.initCommand()
+    this.initPlugin()
     this.initInit()
     this.links.forEach((link) => {
       link.on("cmd", (e, {cmd, args}) => {
@@ -86,6 +87,7 @@ export default class Program extends FloatingLive {
     this.registerPlugin("save", save)
     this.registerPlugin("server", server)
     this.registerPlugin("search", search)
+    this.registerPlugin("bili619Enhance", bili619Enhance)
   }
   private initCommand() {
     this.command.register("addRoom", (r: string | {platform: string, id: string | number}, open: boolean = false) => {

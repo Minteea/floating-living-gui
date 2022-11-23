@@ -3,6 +3,33 @@ import { getRenewType } from '../../utils/nameUtils';
 import User from './User';
 import { Image } from 'antd'
 
+function html_encode(str: string) 
+{ 
+    let s = ""; 
+    if (str.length == 0) return ""; 
+    s = str.replace(/&/g, "&amp;"); 
+    s = s.replace(/</g, "&lt;"); 
+    s = s.replace(/>/g, "&gt;"); 
+    s = s.replace(/ /g, "&nbsp;"); 
+    s = s.replace(/\'/g, "&#39;"); 
+    s = s.replace(/\"/g, "&quot;"); 
+        s = s.replace(/\n/g, "<br/>"); 
+    return s; 
+}
+const g = {
+  jpg:[0],
+  png:[89,86,83,80,78,76,73,7,68,67,63,6,52,49,47,46,44,43,39,38,36,30,26,24,21,18,17,135,130,129,117,11,106],
+  gif:[53,37,2,19,132,110,104,101,100]
+}
+function get619EmoticonType(id: number) {
+  if (g.png.indexOf(id) > -1) {
+    return "png"
+  } else if (g.gif.indexOf(id) > -1) {
+    return "gif"
+  } else {
+    return "jpg"
+  }
+}
 /** 消息 */
 const MessageLine: React.FC<{
   msg: MessageType;
@@ -15,7 +42,14 @@ const MessageLine: React.FC<{
           <Image src={msg.info.user.avatar} referrerPolicy="no-referrer" width={20} height={20} />
           <User msg={msg} />
           :&nbsp;
-          <span>{msg.info.text}</span>
+          {
+            (msg.platform == "bilibili" && msg.room == 2064239) ? 
+            <span dangerouslySetInnerHTML={{__html: html_encode(msg.info.text).replace(/\{\{([0-9]+)\}\}/g, (substr, id) => {
+              return `<img src="https://livechat.zhuluyuanye.com/image/emoticon/${id}.${get619EmoticonType(Number(id))}" referrerPolicy="no-referrer" width=60 height=60></img>`
+            })}}></span>
+            :
+            <span>{msg.info.text}</span>
+          }
         </div>
       );
     }

@@ -6,6 +6,17 @@ Floating Live 弹幕接收工具的可视化界面版本，在 ```floating-live`
 
 目前正处于开发阶段，请谨慎用于正式的使用场景。若使用时出现报错等情况，可在github页面上提issue。
 
+## 619 Edition
+针对监视[b站某不知名虚拟主播](https://live.bilibili.com/2064239)直播间弹幕的拓展版本，实现了[zuluyuanye弹幕姬](https://livechat.zhuluyuanye.com/room/2064239?mlt=1000&mlg=1000&mls=1000&ht=60&hg=20&hs=20&fr=1)的表情包功能，弹幕中若含有形如```{{##}}```的文本(```##```为表情包id)，会替换显示为对应的表情包图片。
+
+该功能仅对平台为```bilibili```，房间号为```2064239```的文字弹幕生效
+
+在文字中添加表情包的方法：根据[zhuluyuanye官网的表情包定义](https://livechat.zhuluyuanye.com/emoticon_map)获取表情包id，在要发送的弹幕中加入```{{id}}```即可
+
+使用例：```这就是主播吗{{10}}，爱了爱了{{25}}```
+
+
+
 ## 使用方法
 
 ### 安装
